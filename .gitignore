@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+potholes.db
+output.jpg
+test.jpg
+yolov8n.pt

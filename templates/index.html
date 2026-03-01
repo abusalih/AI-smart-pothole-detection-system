@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pothole Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">🚧 Smart Pothole Reporting System</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input type="file" class="form-control" name="file" required>
+            </div>
+
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lon" name="lon">
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-5">Detect</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/history" class="btn btn-dark">View Report History</a>
+        </div>
+
+        <hr>
+
+        {% if image %}
+
+            <h5>Potholes Detected: <strong>{{ count }}</strong></h5>
+
+            <h5>
+                Severity:
+                {% if severity == "Low" %}
+                    <span class="badge bg-success">Low</span>
+                {% elif severity == "Medium" %}
+                    <span class="badge bg-warning text-dark">Medium</span>
+                {% else %}
+                    <span class="badge bg-danger">High</span>
+                {% endif %}
+            </h5>
+
+            {% if lat and lon %}
+                <p><strong>Location:</strong> {{ lat }}, {{ lon }}</p>
+            {% endif %}
+
+            <hr>
+
+            <img src="{{ image }}?t={{ range(1,100000)|random }}"
+                 class="img-fluid mt-3"
+                 style="max-width:700px; border-radius:10px;">
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script>
+window.onload = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById("lat").value = position.coords.latitude;
+            document.getElementById("lon").value = position.coords.longitude;
+        });
+    }
+};
+</script>
+
+</body>
+</html>
