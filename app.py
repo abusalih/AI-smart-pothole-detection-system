@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 CLIENT = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
-    api_key="BgHFp2MKPApEAjXl9joR"
+    api_key="YOUR-API-KEY"
 )
 
 UPLOAD_FOLDER = "static"
@@ -45,7 +45,7 @@ def index():
         lat = request.form.get("lat")
         lon = request.form.get("lon")
 
-        result = CLIENT.infer(file_path, model_id="pothole-detection-bfeeg-hp6tw/1")
+        result = CLIENT.infer(file_path, model_id="YOUR-MODEL-ID")
         image = cv2.imread(file_path)
 
         for prediction in result["predictions"]:
