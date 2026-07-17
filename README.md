@@ -100,4 +100,4 @@ Aspiring AI & Machine Learning Engineer
 
 ---
 
-⭐ If you found this project useful, please consider giving it a Star.
+
